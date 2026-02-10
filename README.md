@@ -12,16 +12,16 @@ This repo contains the iOS App that with use of Estimote beacons let  you check 
 
 **To launch the app you need to:**
 
-- Insert your [beacon identifier](https://community.estimote.com/hc/en-us/articles/360004586632-How-to-find-a-beacon-s-identifier) in ViewController.swift
+- Insert your [beacon identifier](https://community.estimote.com/hc/en-us/articles/360004586632-How-to-find-a-beacon-s-identifier) in BeaconManager.swift
 - Insert [AppID and AppToken](https://community.estimote.com/hc/en-us/articles/203607313-What-are-App-ID-and-App-Token-and-what-do-I-need-them-for-) in the AppDelegate.swift
 
 ### Swift Version
 
-- <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-4.2-green.svg" alt=""/></a>
+- <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-6.0-green.svg" alt=""/></a>
 
 ### Frameworks
 
-- [UIKit](https://developer.apple.com/documentation/uikit)
+- [SwiftUI](https://developer.apple.com/documentation/swiftui)
 - [Estimote SDK](https://github.com/Estimote/iOS-SDK)
 
 ### App Screenshots

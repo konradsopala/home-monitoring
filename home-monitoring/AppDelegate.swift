@@ -8,22 +8,17 @@
 
 import UIKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, ESTBeaconManagerDelegate {
 
-    var window: UIWindow?
-    
     let beaconManager = ESTBeaconManager()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        self.beaconManager.delegate = self
-        self.beaconManager.requestAlwaysAuthorization()
-        
-        // TODO: Insert your APPId and APPToken here to compile (from Estimote Cloud)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        beaconManager.delegate = self
+        beaconManager.requestAlwaysAuthorization()
+
+        // TODO: Insert your AppID and AppToken here to compile (from Estimote Cloud)
         ESTConfig.setupAppID(<#Your AppID#>, andAppToken: <#Your AppToken#>)
-        
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-        
+
         return true
     }
 }
