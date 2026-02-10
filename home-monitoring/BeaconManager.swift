@@ -73,13 +73,14 @@ extension BeaconManager: ESTDeviceConnectableDelegate {
 
     func estDeviceConnectionDidSucceed(_ device: ESTDeviceConnectable) {
         print("Connection Output Status: Connected")
+        let rawPressure = monitoringDevice?.settings?.sensors.pressure.getValue()
+        let rawTemperature = monitoringDevice?.settings?.sensors.temperature.getValue()
         Task { @MainActor in
             connectionState = .connected
-
-            if let rawPressure = monitoringDevice?.settings?.sensors.pressure.getValue() {
+            if let rawPressure {
                 pressure = Int(rawPressure / 100)
             }
-            if let rawTemperature = monitoringDevice?.settings?.sensors.temperature.getValue() {
+            if let rawTemperature {
                 temperature = Int(rawTemperature)
             }
         }
