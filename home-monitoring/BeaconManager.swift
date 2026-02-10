@@ -73,23 +73,29 @@ extension BeaconManager: ESTDeviceConnectableDelegate {
 
     func estDeviceConnectionDidSucceed(_ device: ESTDeviceConnectable) {
         print("Connection Output Status: Connected")
-        connectionState = .connected
+        Task { @MainActor in
+            connectionState = .connected
 
-        if let rawPressure = monitoringDevice?.settings?.sensors.pressure.getValue() {
-            pressure = Int(rawPressure / 100)
-        }
-        if let rawTemperature = monitoringDevice?.settings?.sensors.temperature.getValue() {
-            temperature = Int(rawTemperature)
+            if let rawPressure = monitoringDevice?.settings?.sensors.pressure.getValue() {
+                pressure = Int(rawPressure / 100)
+            }
+            if let rawTemperature = monitoringDevice?.settings?.sensors.temperature.getValue() {
+                temperature = Int(rawTemperature)
+            }
         }
     }
 
     func estDevice(_ device: ESTDeviceConnectable, didFailConnectionWithError error: Error) {
         print("Connection Output Status: \(error.localizedDescription)")
-        connectionState = .error(error.localizedDescription)
+        Task { @MainActor in
+            connectionState = .error(error.localizedDescription)
+        }
     }
 
     func estDevice(_ device: ESTDeviceConnectable, didDisconnectWithError error: Error?) {
         print("Connection Output Status: Disconnected")
-        connectionState = .disconnected
+        Task { @MainActor in
+            connectionState = .disconnected
+        }
     }
 }
