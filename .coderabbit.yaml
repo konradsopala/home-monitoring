@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+early_access: true
+reviews:
+  profile: "assertive"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: true
+  review_status: true
+  review_details: true
+  auto_review:
+    enabled: true
+    drafts: false
+  custom:
+      - name: "cleanup stale imports"
+        instructions: |
+          Scan the changed files for unused imports and remove them.
+          Preserve imports used in type positions.
+          Do not reorder existing imports; only remove stale ones.
+      - name: "tighten types"
+        instructions: |
+          Replace `any` types in the changed files with the most specific
+          TypeScript type that is correct given the surrounding context.
+          Add explicit return types to exported functions that are missing them.
+chat:
+  auto_reply: true
