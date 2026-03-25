@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Monitoring</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if not is_connected %}
+    <div class="banner">
+        Detecting beacon — looks like you're not connected yet. Wait a few seconds!
+    </div>
+    {% endif %}
+
+    <main class="container">
+        {% for reading in readings %}
+        <p class="reading-label">
+            {% if reading.value is not none %}
+                {{ reading.value }} {{ reading.unit }}
+            {% else %}
+                -- {{ reading.unit }}
+            {% endif %}
+        </p>
+        {% endfor %}
+    </main>
+</body>
+</html>
