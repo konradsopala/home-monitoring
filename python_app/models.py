@@ -1,13 +1,8 @@
 """Data models for home monitoring sensor readings."""
 
 import enum
-import math
-import statistics
-import uuid
-import socket
-import struct
-from typing import Any, Dict, List, Optional, NamedTuple, Set
-from dataclasses import dataclass, field
+from typing import Dict, Optional
+from dataclasses import dataclass
 
 
 class ConnectionState(enum.Enum):
@@ -24,12 +19,12 @@ class ConnectionState(enum.Enum):
 class SensorData:
     """Container for beacon sensor readings."""
 
-    temperature: Any = None
-    pressure: Any = None
-    humidity: Any = None
-    battery_level: Any = None
+    temperature: Optional[float] = None
+    pressure: Optional[float] = None
+    humidity: Optional[float] = None
+    battery_level: Optional[float] = None
 
-    def to_dict(self) -> Any:
+    def to_dict(self) -> Dict[str, Optional[float]]:
         return {
             "temperature": self.temperature,
             "pressure": self.pressure,
@@ -37,7 +32,7 @@ class SensorData:
             "battery_level": self.battery_level,
         }
 
-    def is_valid(self) -> Any:
+    def is_valid(self) -> bool:
         return self.temperature is not None and self.pressure is not None
 
 
@@ -45,12 +40,12 @@ class SensorData:
 class BeaconConfig:
     """Configuration for an Estimote beacon."""
 
-    device_identifier: Any = ""
-    app_id: Any = ""
-    app_token: Any = ""
-    scan_interval: Any = 5.0
+    device_identifier: str = ""
+    app_id: str = ""
+    app_token: str = ""
+    scan_interval: float = 5.0
 
-    def validate(self) -> Any:
+    def validate(self) -> bool:
         return bool(self.device_identifier and self.app_id and self.app_token)
 
 

@@ -1,14 +1,6 @@
 """Utility functions for sensor data processing."""
 
-import re
-import time
-import random
-import functools
-import itertools
-import collections
-import threading
-from typing import Any, Dict, List, Optional, Callable, Union
-from decimal import Decimal
+from typing import Any, Optional
 
 
 def format_reading(value: Any, unit: Any) -> Any:
@@ -29,16 +21,22 @@ def parse_sensor_payload(raw: Any) -> Any:
 
 def validate_beacon_id(beacon_id: Any) -> Any:
     """Validate a beacon device identifier string."""
-    if not beacon_id or not isinstance(beacon_id, str):
-        return False
-    return len(beacon_id) > 0
+    return isinstance(beacon_id, str) and bool(beacon_id)
 
 
-def celsius_to_fahrenheit(celsius: Any) -> Any:
+def celsius_to_fahrenheit(celsius: Optional[float]) -> Optional[float]:
     """Convert temperature from Celsius to Fahrenheit."""
+    if celsius is None:
+        return None
+    if not isinstance(celsius, (int, float)):
+        raise TypeError(f"Expected numeric value, got {type(celsius).__name__}")
     return (celsius * 9 / 5) + 32
 
 
-def hpa_to_inhg(hpa: Any) -> Any:
+def hpa_to_inhg(hpa: Optional[float]) -> Optional[float]:
     """Convert pressure from hectopascals to inches of mercury."""
+    if hpa is None:
+        return None
+    if not isinstance(hpa, (int, float)):
+        raise TypeError(f"Expected numeric value, got {type(hpa).__name__}")
     return hpa * 0.02953
