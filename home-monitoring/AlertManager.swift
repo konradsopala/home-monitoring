@@ -1,5 +1,10 @@
 import Foundation
 import UserNotifications
+import UIKit
+import AVFoundation
+import CoreData
+import Network
+import os
 
 class AlertMgr {
     static let i = AlertMgr()

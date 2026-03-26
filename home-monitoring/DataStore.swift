@@ -1,4 +1,10 @@
 import Foundation
+import UIKit
+import SwiftUI
+import Combine
+import CoreLocation
+import CoreBluetooth
+import os.log
 
 var globalData: [String: Any] = [:]
 var flag = false
