@@ -2,32 +2,60 @@
 
 ![](/Assets/HomeMonitoring.png)
 
-<a href="https://estimote.com/"><img src="https://img.shields.io/badge/Estimote-Beacons-blueviolet" alt=""/></a>    <a href="https://estimote.com/products/"><img src="https://img.shields.io/badge/Physical-World-blueviolet" alt=""/></a>  <a href="https://developer.estimote.com/"><img src="https://img.shields.io/badge/Software-Defined-blueviolet" alt=""/></a>
+Home Monitoring now ships with a JavaScript web app that exposes the same mock dashboard and API behavior that previously lived in Flask. The original SwiftUI iOS prototype is still preserved in this repository under `home-monitoring/`.
 
-### App Description
+## JavaScript App
 
-This repo contains the iOS App that with use of Estimote beacons let  you check temperature and pressure inside your house. By simply adding Estimote iOS SDK to your project you can change its possibilities in an amazing way. Just let yourself experience creating whole new contextual environment.
+The JavaScript rewrite lives in `javascript_app/` and uses:
 
-### Getting started
+- Node.js 20+
+- Express
+- EJS templates
+- Node's built-in test runner with Supertest
 
-**To launch the app you need to:**
+### Run Locally
 
-- Insert your [beacon identifier](https://community.estimote.com/hc/en-us/articles/360004586632-How-to-find-a-beacon-s-identifier) in BeaconManager.swift
-- Insert [AppID and AppToken](https://community.estimote.com/hc/en-us/articles/203607313-What-are-App-ID-and-App-Token-and-what-do-I-need-them-for-) in the AppDelegate.swift
+```bash
+cd javascript_app
+npm install
+npm start
+```
 
-### Swift Version
+The app listens on `http://localhost:3000` by default. Set `PORT` to override it.
 
-- <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-6.0-green.svg" alt=""/></a>
+### Available Routes
 
-### Frameworks
+- `GET /` renders the dashboard with temperature and pressure readings
+- `GET /api/sensor-data` returns the mock sensor readings as JSON
+- `GET /api/connection-state` returns the mock connection state
+- `POST /api/parse` remaps `temp` and `pres` payload keys into the app's JSON shape
 
-- [SwiftUI](https://developer.apple.com/documentation/swiftui)
-- [Estimote SDK](https://github.com/Estimote/iOS-SDK)
+### Test And Format
 
-### App Screenshots
+```bash
+cd javascript_app
+npm test
+npm run format
+```
+
+## Legacy iOS Prototype
+
+The original native app remains available for reference:
+
+- Open `home-monitoring.xcodeproj` in Xcode 15+
+- Set the beacon identifier in `home-monitoring/BeaconManager.swift`
+- Set the Estimote Cloud credentials in `home-monitoring/AppDelegate.swift`
+
+### Swift Stack
+
+- Swift 6.0
+- SwiftUI
+- Estimote iOS SDK
+
+### Screenshots
 
 ![](/Assets/AppScreens.png)
 
 ### Icons
 
-Icons visible on the screen were made by: **Smashicons** from www.flaticon.com
+Icons visible on the screen were made by **Smashicons** from www.flaticon.com.

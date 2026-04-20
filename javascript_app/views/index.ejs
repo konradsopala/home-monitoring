@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Monitoring</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <% if (!isConnected) { %>
+    <div class="banner">
+      Detecting beacon - looks like you're not connected yet. Wait a few seconds!
+    </div>
+    <% } %>
+
+    <main class="container">
+      <% readings.forEach((reading) => { %>
+      <p class="reading-label">
+        <% if (reading.value !== null && reading.value !== undefined) { %>
+        <%= reading.value %> <%= reading.unit %>
+        <% } else { %>
+        -- <%= reading.unit %>
+        <% } %>
+      </p>
+      <% }) %>
+    </main>
+  </body>
+</html>
